@@ -15,9 +15,10 @@ const defaultSliderSettings = {
 let arraySlider = document.querySelectorAll('.lesuorac_slider');
 
 arraySlider.forEach(slider => {
-    slider.slider = function (sliderSettings = {}) {
-        //let moveNum = 0;
-        let timerAautoplay;
+    slider.timerAautoplay = undefined;
+
+    slider.slider = function (sliderSettings = {}, slideActive = 0) {
+        stopAutoPlay();
 
         for (key in defaultSliderSettings)
             if (sliderSettings[key] === undefined)
@@ -32,7 +33,6 @@ arraySlider.forEach(slider => {
         let navs = slider.querySelector('.navs');
         let dotsBlock = slider.querySelector('.dots_block');
 
-        setActiveDot(0);
 
         nextSlideBtn.addEventListener('click', nextSlideClick);
         prevSlideBtn.addEventListener('click', prevSlideClick);
@@ -43,6 +43,8 @@ arraySlider.forEach(slider => {
             sliderSettings.autoplay = true;
         } else {
             if (sliderSettings.dots) {
+                setActiveDot(0);
+
                 dotsBlock.addEventListener('click', (event) => {
                     event.preventDefault();
 
@@ -67,17 +69,21 @@ arraySlider.forEach(slider => {
         let slideCount = slides.length;
         let counter = 0;
 
+        if (slideActive !== 0) {
+            nextSlideClick(undefined, slideActive);
+        }
+
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////
         function startAutoPlay(timeout = sliderSettings.timeout) {
             if (sliderSettings.autoplay) {
                 sliderSettings.loop = true;
-                timerAautoplay = setInterval(() => nextSlideClick(), timeout);
+                slider.timerAautoplay = setInterval(() => nextSlideClick(), timeout);
             }
         }
 
         function stopAutoPlay() {
-            if (timerAautoplay !== undefined)
-                clearInterval(timerAautoplay);
+            if (slider.timerAautoplay !== undefined)
+                clearInterval(slider.timerAautoplay);
         }
 
         function firstSlide() {
@@ -130,7 +136,8 @@ arraySlider.forEach(slider => {
             }
 
             counter += numMoveSlides;
-            setActiveDot(counter);
+            if( sliderSettings.dots )
+                setActiveDot(counter);
 
             stopAutoPlay();
 
@@ -167,7 +174,9 @@ arraySlider.forEach(slider => {
                     counter = slideCount;
                 }
             counter -= numMoveSlides
-            setActiveDot(counter);
+
+            if (sliderSettings.dots)
+                setActiveDot(counter);
 
             stopAutoPlay();
 

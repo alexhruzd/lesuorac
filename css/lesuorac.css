@@ -12,10 +12,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .lesuorac_slider .one_slide img {
   width: 100%;
-  padding: 10px;
 }
 .lesuorac_slider .navs {
   display: flex;
