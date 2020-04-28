@@ -61,3 +61,9 @@ transitionDelay | number          |800              | Slide move speed          
 dots            | boolean         |true             | Current slide indicator dots            |
 stopOnHover     | boolean         |true             | Pause autoplay on hover.                |
 margin          | number          | 10              | Spacing between slides                  |
+
+### Examples of using
+
+Gallery example:
+
+[https://github.com/alexhruzd/gallery_lesourac](https://github.com/alexhruzd/gallery_lesourac)
