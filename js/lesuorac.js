@@ -8,6 +8,7 @@ const defaultSliderSettings = {
     navs: true,
     transitionDelay: 800,
     dots: true,
+    counter: false,
     stopOnHover: true,
     margin: 10
 }
@@ -116,6 +117,11 @@ arraySlider.forEach(slider => {
             }
         }
 
+        function setNumToCounterBlock(num) {
+            let numCounter = document.getElementById('numSlide');
+            numCounter.innerHTML = ((num+1).toString()).padStart(2, '0');
+        }
+
         function setActiveDot(numDot) {
             for (const dotIt of dotsBlock.children) {
                 dotIt.classList.remove('active');
@@ -136,7 +142,11 @@ arraySlider.forEach(slider => {
             }
 
             counter += numMoveSlides;
-            if( sliderSettings.dots )
+
+            if (sliderSettings.counter)
+                setNumToCounterBlock(counter);
+
+            if (sliderSettings.dots)
                 setActiveDot(counter);
 
             stopAutoPlay();
@@ -175,6 +185,9 @@ arraySlider.forEach(slider => {
                 }
             counter -= numMoveSlides
 
+            if (sliderSettings.counter)
+                setNumToCounterBlock(counter);
+
             if (sliderSettings.dots)
                 setActiveDot(counter);
 
@@ -206,7 +219,6 @@ arraySlider.forEach(slider => {
     }
 });
 
-
 function createSlider(slider, sliderSettings) {
 
     let oneSlideArr = slider.querySelectorAll('div');
@@ -225,6 +237,7 @@ function createSlider(slider, sliderSettings) {
         </div>
         <div class="navs">
             <a href="#" class="prev_slide"><</a>
+            ${ sliderSettings.counter ? createCounter() : ''}
             ${ sliderSettings.dots ? createDots() : ''}
             <a href="#" class="next_slide">></a>
         </div>
@@ -248,6 +261,21 @@ function createSlider(slider, sliderSettings) {
             <div class="dots_block">
             ${dotBlock}
             </div>
+        `;
+    }
+
+    function createCounter() {
+        let counterBlock = '';
+
+        counterBlock += "<span id='numSlide'>01</span>";
+        counterBlock += "<span>/</span>";
+        counterBlock += `<span class='count_white' id='countSlide'>${((oneSlideArr.length).toString()).padStart(2, '0')}</span>`;
+
+        return `
+            <div class="num_slide_block">
+            ${counterBlock}
+            </div>
+
         `;
     }
 }
