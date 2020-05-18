@@ -33,6 +33,9 @@
   background-color: #f1f1f1;
   color: #777777;
 }
+.lesuorac_slider .navs > a .arrow_control {
+  display: none;
+}
 .lesuorac_slider .navs > a:hover {
   background-color: #ddd;
 }

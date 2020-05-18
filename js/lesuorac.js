@@ -236,10 +236,10 @@ function createSlider(slider, sliderSettings) {
             </div>
         </div>
         <div class="navs">
-            <a href="#" class="prev_slide"><</a>
+            <a href="#" class="prev_slide"> <span><</span> <i class="fa fa-long-arrow-left arrow_control" aria-hidden="true"></i></a>
             ${ sliderSettings.counter ? createCounter() : ''}
             ${ sliderSettings.dots ? createDots() : ''}
-            <a href="#" class="next_slide">></a>
+            <a href="#" class="next_slide"> <span>></span> <i class="fa fa-long-arrow-right arrow_control" aria-hidden="true"></i></a>
         </div>
     `;
 
