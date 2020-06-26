@@ -1,6 +1,6 @@
 # lesuorac
 
-*Carousel, but reverse*
+*Carousel*
  
 ### Example using
 
