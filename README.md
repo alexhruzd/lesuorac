@@ -2,8 +2,6 @@
 
 *Carousel*
  
-### Example using
-
 [Download](https://github.com/alexhruzd/lesuorac) and copy to the project folder.
 
 Add to HTML in your `<body>`:
